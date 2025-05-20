@@ -7,7 +7,7 @@ Simple Go CLI to fetch and display syntax snippets for popular programming langu
 ## 🌐 Backend YAML Source
 
 All cheat sheets are hosted here:  
-**[https://raw.githubusercontent.com/thineshsubramani/cheatsheet/main/](https://github.com/thineshsubramani/cheatsheet)**
+**[Backend YAML Files](https://github.com/thineshsubramani/cheatsheet)**
 
 ---
 
