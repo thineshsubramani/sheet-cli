@@ -35,4 +35,3 @@ sheet <language> <section> [-b backend-url] [-d]
 
 Built with ❤️ by Thinesh.
 Contributions & issues welcome.
-"""
