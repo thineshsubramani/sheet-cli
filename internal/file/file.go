@@ -17,11 +17,6 @@ func getCachePath() string {
 	return filepath.Join(dir, cacheDir)
 }
 
-// ensureCacheDir creates the cache directory if it doesn't exist.
-func ensureCacheDir() error {
-	return os.MkdirAll(getCachePath(), 0755)
-}
-
 // LocalCacheFile returns the full path to a cache file.
 func LocalCacheFile(name string) string {
 	return filepath.Join(getCachePath(), name)
@@ -40,8 +35,10 @@ func ReadLocalFile(name string) ([]byte, error) {
 
 // WriteLocalFile writes content to a local cache file.
 func WriteLocalFile(name string, content []byte) error {
-	if err := ensureCacheDir(); err != nil {
+	cacheFile := LocalCacheFile(name)
+	// Create all parent directories for the cache file
+	if err := os.MkdirAll(filepath.Dir(cacheFile), 0755); err != nil {
 		return fmt.Errorf("failed to create cache directory: %w", err)
 	}
-	return os.WriteFile(LocalCacheFile(name), content, 0644)
+	return os.WriteFile(cacheFile, content, 0644)
 }
