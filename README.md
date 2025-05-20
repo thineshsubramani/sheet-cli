@@ -1,37 +1,110 @@
-# Cheatsheet CLI Tool
+# 🧠 sheet-cli — Your Terminal Cheat Sheet Sidekick
 
-**Cheatsheet CLI** is a fast, extensible command-line tool to fetch and display language or tech cheatsheets from simple YAML files. Perfect for DevOps, SREs, and developers who want quick access to syntax snippets without jumping into heavy docs.
-
-## Features
-- Supports multiple languages & tech stacks via YAML config
-- Dynamic aggregation of sections with `all` keyword (combines all snippets)
-- Alias support for quick language selection (e.g., `go`, `g`, `golang`)
-- Fetch from remote URLs (GitHub raw) or local files seamlessly
-- Minimal dependencies, pure Go implementation
-- Detail flag to toggle syntax only or full description + syntax
-
-## How To Use
-```bash
-sheet <language> <section> [-b backend-url] [-d]
-````
-
-* Example: `sheet go all` to get entire Go cheatsheet aggregated
-* Use `-b` to override backend (defaults to GitHub raw URL)
-* Use `-d` to show detailed descriptions alongside syntax
-
-## Repo Structure
-
-* `main.yaml` — Language registry with aliases and YAML paths
-* `<language>/<language>.yaml` — Syntax snippets per language
-* `sheet.go` — Main Go CLI program
-
-## Why Use This
-
-* Lightweight & fast lookup of syntax
-* Easy to extend by adding new YAML files
-* Great for SREs/DevOps wanting quick refreshers on languages or CLI commands
+Simple Go CLI to fetch and display syntax snippets for popular programming languages like **Go**, **Python**, etc., from a remote YAML-based backend. Built-in alias support, in-memory caching, and colorized output. Fast, clean, and made for DevOps/SREs who live in terminals.
 
 ---
 
-Built with ❤️ by Thinesh.
-Contributions & issues welcome.
+## 🌐 Backend YAML Source
+
+All cheat sheets are hosted here:  
+**https://raw.githubusercontent.com/thineshsubramani/cheatsheet/main/**
+
+---
+
+## ⚡ Cache System
+
+Multi-layer caching for speed and offline support:
+1. 🧠 **In-memory** – Fastest access after first load  
+2. 💾 **Local file** – Cached YAML files stored locally  
+3. 🌐 **Remote GitHub** – Fetched if not cached or forced refresh  
+
+Use `-r` to refresh everything manually.
+
+---
+
+## 🚀 Usage
+
+```bash
+go run main.go <language> [section1,section2,...]
+````
+
+### ✅ Basic Examples
+
+```bash
+go run main.go go map,slice
+go run main.go go help
+go run main.go python all
+```
+
+### 🧽 Refresh All Cache
+
+```bash
+go run main.go --r go all
+```
+
+### 📖 Flags
+
+| Flag  | Shortcut | Description                                   |
+| ----- | -------- | --------------------------------------------- |
+| `--b` | `-b`     | Custom backend base URL or local path         |
+| `--d` | `-d`     | Show detailed output with description         |
+| `--r` | `-r`     | Force refresh: reload everything from backend |
+
+---
+
+## 🧩 Aliases and Help
+
+Every section can optionally define an alias (e.g. `map` → `m`) in the YAML.
+Use `help` as section name to list all available sections with their aliases:
+
+```bash
+go run main.go go help
+```
+
+---
+
+## 🎨 Output Colors
+
+* 💙 Titles = Cyan
+* 💛 Descriptions = Yellow
+* 💚 Syntax/Code = Green
+
+Built-in ANSI terminal coloring. Works great on:
+
+* macOS/Linux terminals ✅
+* Git Bash, WSL, MobaXterm on Windows ✅
+
+---
+
+## ✍️ Example Output
+
+```bash
+go run main.go go map
+```
+
+```
+---- Map ----
+Go maps basics
+
+m := map[string]int{"a": 1, "b": 2}
+fmt.Println(m["a"]) // access map
+```
+
+---
+
+## 👊 That's It!
+
+Just run, fetch, and hack. Update your YAMLs, and hit `-r` to sync changes instantly.
+Made for SREs and CLI lovers who don’t wanna open a browser for every damn syntax question.
+
+```
+
+---
+
+Let me know if you want to add:
+- Support for custom local YAML paths
+- Offline-only mode
+- GitHub-style auto-update checker
+
+Happy hacking, Thinesh 🤘
+```
