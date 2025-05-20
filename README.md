@@ -124,7 +124,6 @@ make clean
 **What’s New:**
 - 🛠️ Fixed import cycle with a shiny new `file` package.
 - 📦 Added `Makefile` for easy Windows/Linux builds.
-- 🚀 Cleaned up code, squashed typos (looking at you, `§ions`).
 - 💪 Ready for testing with full caching and alias support.
 
 Download the binaries and give it a spin! Feedback welcome—this is alpha, so expect some rough edges. 🤘
